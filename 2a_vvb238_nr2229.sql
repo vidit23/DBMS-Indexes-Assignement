@@ -11,15 +11,16 @@ SELECT COUNT(Emp1.ID) FROM Employee EMP1, Employee EMP2 WHERE EMP1.Salary>=EMP2.
 -- 1 row in set (0.76 sec)
 -- It took 0.76sec to query
 
--- After adding index t0 ID and Manager:
-
-mysql> CREATE  INDEX eid ON Employee(ID); 
+CREATE  INDEX eid ON Employee(ID); 
 -- Query OK, 0 rows affected (0.47 sec)
 -- Records: 0  Duplicates: 0  Warnings: 0
 
-mysql> CREATE  INDEX mid ON Employee(Manager);
+CREATE  INDEX mid ON Employee(Manager);
 -- Query OK, 0 rows affected (0.19 sec)
 -- Records: 0  Duplicates: 0  Warnings: 0
+
+-- After adding indexes ID and Manager:
+SELECT COUNT(Emp1.ID) FROM Employee EMP1, Employee EMP2 WHERE EMP1.Salary>=EMP2.Salary+50 AND EMP1.MANAGER=EMP2.ID;
 -- +----------------+
 -- | count(Emp1.ID) |
 -- +----------------+

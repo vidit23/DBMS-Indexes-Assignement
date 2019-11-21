@@ -36,12 +36,16 @@ HAVING COUNT(Department)>1) GROUP BY Department;
 -- +---------------+-------------+
 -- 94 rows in set (51.78 sec)
 -- It took 51.78sec to query
--- 
--- After Adding Index to EmpID:
 
-mysql> CREATE  INDEX ceid ON Course(EmpID);                                  
+CREATE  INDEX ceid ON Course(EmpID);                                  
 -- Query OK, 0 rows affected (0.08 sec)
 -- Records: 0  Duplicates: 0  Warnings: 0
+
+-- After Adding Index to EmpID:
+SELECT Department, AVG(Salary) FROM Employee 
+WHERE Department IN (SELECT Department FROM (SELECT * FROM Course 
+LEFT JOIN Employee ON Employee.ID = Course.EmpID) AS Dept GROUP BY Department 
+HAVING COUNT(Department)>1) GROUP BY Department;
 -- +---------------+-------------+
 -- | Department    | AVG(Salary) |
 -- +---------------+-------------+
