@@ -1,0 +1,1 @@
+The total time taken to execute the commands is : 130.09094095230103 seconds
